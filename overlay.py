@@ -50,7 +50,7 @@ def matplotlib_overlay_multiple(filenames:list[str]):
         theta: ax.scatter([], [], s=10, color=colors[theta], alpha=0.65, label=f"theta = {theta:g}")
         for theta in runs
     }
-    ax.legend(facecolor="#101522", labelcolor="white")
+    ax.legend(facecolor="#101522", labelcolor="white", loc="upper right")
     artists = tuple(dots_by_theta.values())
 
     def update(i):
