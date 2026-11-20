@@ -15,7 +15,7 @@ bodies = [
     ]
 
 
-with open("worlds/initial-state.csv", "w") as f:
+with open("worlds/random-distribution-100.csv", "w") as f:
     for body in bodies:
         f.write(
             f"{body[0]};{body[1]};{body[2]}\n"

@@ -7,7 +7,7 @@ from physics import step
 
 
 def bare_render_loop():
-    with open("worlds/initial-state.csv", "r") as f:
+    with open("worlds/random-distribution-100.csv", "r") as f:
         bodies = [
             Body(float(x), float(y), float(mass))
             for x, y, mass in csv.reader(f, delimiter=";")
