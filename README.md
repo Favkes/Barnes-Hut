@@ -13,7 +13,12 @@ It is composed of several modules:
 
 
 # Analysis
-I have compared the results of the currently implemented version of the algorithm for varying `theta` and `dt`, and summarized them in a few plots in the `summary` directory.
+I have compared the results of the currently implemented version of the algorithm for varying `theta` and `dt` values, and summarized them in a few plots and overlay animations for comparison:
+
+<sup><sub>Simulations for `dt = 0.0005`, `theta = [0.00, 0.01]` and an overlay of the two:</sub></sup>
+![Simulation examples](gifs/comparison_combined_small.gif)
+
+![Mean Position Error plot for differrent theta values](summary/mae_over_time.svg)
 
 
 # Meaning
