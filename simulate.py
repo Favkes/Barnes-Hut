@@ -1,12 +1,12 @@
 import csv
 from pathlib import Path
 
-from config import MAX_FRAMES, SUB_STEPS, DT, THETA, Window
+from config import MAX_FRAMES, SUB_STEPS, DT, THETAS, Window
 from models import Bounds2, Interval, Body, build_tree
 from physics import step
 
 
-def bare_render_loop():
+def bare_render_loop(theta:float):
     with open("worlds/random-distribution-100.csv", "r") as f:
         bodies = [
             Body(float(x), float(y), float(mass))
@@ -16,7 +16,8 @@ def bare_render_loop():
     # view_bounds = Bounds2(Interval(0, Window.w), Interval(0, Window.h))
 
     Path("simulations").mkdir(parents=True, exist_ok=True)
-    with open(f"simulations/bh_theta_{THETA}.csv", "w", newline="", encoding="utf-8") as f:
+    filename = f"simulations/bh_theta_{theta}.csv"
+    with open(filename, "w", newline="", encoding="utf-8") as f:
         out = csv.writer(f, delimiter=";")
         out.writerow(["step", "body_id", "x", "y", "vx", "vy", "mass"])
 
@@ -29,7 +30,7 @@ def bare_render_loop():
 
         while frame < MAX_FRAMES:
             frame += 1
-            print(frame)
+            print(f"Theta: {theta} Frame: {frame}/{MAX_FRAMES}", end="\r")
 
             for _ in range(SUB_STEPS):
                 # visible = [b for b in bodies if view_bounds.contain(b)]
@@ -39,14 +40,16 @@ def bare_render_loop():
                     Interval(min(ys) - 1.0, max(ys) + 1.0)
                 )
                 tree = build_tree(bounds, bodies)
-                step(bodies, tree, dt=DT, theta=THETA)
+                step(bodies, tree, dt=DT, theta=theta)
 
             out.writerows(
                 (frame * SUB_STEPS, i, b.x, b.y, b.vx, b.vy, b.m)
                 for i, b in enumerate(bodies)
             )
+    print(f"\n└Saved to '{filename}'")
 
 
 if __name__=="__main__":
-    bare_render_loop()
+    for theta in THETAS:
+        bare_render_loop(theta=theta)
 
