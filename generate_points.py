@@ -1,13 +1,5 @@
 import random
-from config import Window
-
-
-
-TOTAL_BODIES = 100
-MAX_DEPTH = 16
-MARGIN_X = int(0.2 * Window.w)
-MARGIN_Y = int(0.2 * Window.h)
-MASS = 25_0000
+from config import Window, MARGIN_X, TOTAL_BODIES, MARGIN_Y, MASS
 
 bodies = [
         (random.randint(0+MARGIN_X, Window.w-MARGIN_X), random.randint(0+MARGIN_Y, Window.h-MARGIN_Y), MASS)
