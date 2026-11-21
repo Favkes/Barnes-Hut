@@ -9,19 +9,23 @@ It is composed of several modules:
  - `simulate.py` is an entry point for the simulation that takes no inline arguments, however it works off the configured global constants, and snapshots the world in steps into a .CSV file.
  - `render.py` generates images from the simulation .CSV files and composes them into .GIF files.
  - `overlay.py` generates an overlay of multiple simulations from their .CSV files, and composes them into a .GIF file.
- - `analysis.py` compares multiple simulations and analyzes the relationship between `theta` - the tolerance of Barnes-Hut optimization, `dt` - the time step over which the physics of the simulation are integrated, and the summarized statistically numerical error of the optimized simulations.
+ - `analysis.py` compares multiple simulations and analyzes the relationship between $\theta$ (`THETA`) - the tolerance of Barnes-Hut optimization, `dt` - the time step over which the physics of the simulation are integrated, and the summarized statistically numerical error of the optimized simulations.
 
 
 # Analysis
-I have compared the results of the currently implemented version of the algorithm for varying `theta` and `dt` values, and summarized them in a few plots and overlay animations for comparison:
+I have compared the results of the currently implemented version of the algorithm for varying $theta$ and $dt$ values, and summarized them in a few plots and overlay animations for comparison:
 
-<sup><sub>Simulations for `dt = 0.0005`, `theta = [0.00, 0.01]` and an overlay of the two:</sub></sup>
+Simulations for $dt = 0.0005$, $\theta \in [0.00, 0.01]$ and an overlay of the two:
 ![Simulation examples](gifs/comparison_combined_small.gif)
 
 ![Mean Position Error plot for differrent theta values](summary/mae_over_time.svg)
 
+The Mean Position error seems to become noticeable only after approx. $800$ steps ($dt = 0.0005$) for $\theta$'s on the order of $10^-2$. Beyond this point, the error appears to grow approximately linearly with time, 
+with larget values of $\theta$ generally producing greater deviations.
 
-# Meaning
+
+
+# Goal
 I've first learned about the Barnes-Hut algorithm around 2023, while working on a first N-body simulation of my own, optimizing it by migrating maths to numpy and rendering everything in an OpenCV window, as that was the only thing I knew.
 At the time I've seen N-body simulations of *millions* of bodies, and researched how they managed to work in real time, and that's how I stumbled upon this specific algorithm.
 I had trouble understanding it then, but decided to figure it out completely on my own - therefore I've spent years occasionally picking up on it again, trying to figure out the maths and logic behind how the QuadTrees should work, how to put everything into code, and how to structure the whole project.
