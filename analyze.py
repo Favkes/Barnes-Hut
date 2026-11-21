@@ -1,8 +1,8 @@
 import sys
 import os
 import csv
+from pathlib import Path
 
-from models import Body
 import matplotlib.pyplot as plt
 
 
@@ -17,6 +17,13 @@ def plot_mae_over_time(errors:dict[float,dict[int,float]]):
     plt.title("Mean position erorr vs simulation step")
     plt.legend()
     plt.grid(True)
+
+    Path("summary").mkdir(parents=True, exist_ok=True)
+    plt.tight_layout()
+
+    plt.savefig("summary/mae_over_time.svg", bbox_inches="tight")
+    plt.savefig("summary/mae_over_time.png", dpi=300, bbox_inches="tight")
+
     plt.show()
 
 
