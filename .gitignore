@@ -2,3 +2,5 @@
 local-stuff/*
 .venv/*
 *.xml
+__pycache__/*
+analysis/*
